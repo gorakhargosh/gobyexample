@@ -1,3 +1,5 @@
 include_rules
 
+.gitignore
+
 : web-server.go |> !gocc |>

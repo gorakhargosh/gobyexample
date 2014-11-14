@@ -9,6 +9,7 @@ import sys
 
 from os import path
 
+
 DIR_PATH = path.abspath(path.realpath(path.dirname(__file__)))
 TOP_DIR_PATH = path.dirname(DIR_PATH)
 GO_PATH = ';'.join([
@@ -20,7 +21,6 @@ def main(args):
   env = os.environ.copy()
   env['GOPATH'] = GO_PATH
   command = ' '.join(['go'] + args[1:])
-  print command
   subprocess.call(command, env=env, shell=True)
 
 if __name__ == '__main__':
