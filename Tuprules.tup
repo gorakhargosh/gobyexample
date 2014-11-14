@@ -1,0 +1,3 @@
+TOP_DIR = $(TUP_CWD)
+
+!gocc = |> GOPATH=$(TOP_DIR)/lib/src go build %f |> %B
