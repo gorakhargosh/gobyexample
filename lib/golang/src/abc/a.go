@@ -7,5 +7,5 @@ func init() {
 }
 
 func Foo() {
-	fmt.Println("a")
+	fmt.Println("abc.Foo a walla")
 }
