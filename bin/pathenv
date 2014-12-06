@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+"""Sets the path-related environment for utilities using absolute paths.
+
+pathenv is does more-or-less the same thing as the Unix env(1) (see: `man env`),
+but `pathenv` specializes in processing only environment variables with path
+lists and turns each path into its absolute path for tup to work.
+
+"""
+
+import argparse
+import os
+import subprocess
+import sys
+
+
+# NOTE(yesudeep): Of course, this can be improved a lot.
+
+
+def parse_arguments(argv):
+  """Parses command line arguments to extract environment values.
+
+  Args:
+    argv: The command line argument vector.
+
+  Return:
+    (environment dictionary, remaining arguments)
+  """
+  remaining = []
+  env = os.environ.copy()
+  for i, arg in enumerate(argv):
+    if not arg.startswith('-') and '=' in arg:
+      k, v = arg.split('=', 1)
+      env[k] = os.pathsep.join([os.path.abspath(p) for p in v.split(os.pathsep)])
+    else:
+      remaining = argv[i:]
+      break
+  return env, remaining
+
+
+def main(argv):
+  """Entry-point.
+
+  Args:
+    argv: The command line argument vector.
+  """
+  env, remaining = parse_arguments(argv)
+  ret = subprocess.call(' '.join(remaining), env=env, shell=True)
+  if ret != 0:
+    sys.exit(ret)
+
+
+if __name__ == '__main__':
+  main(sys.argv[1:])
