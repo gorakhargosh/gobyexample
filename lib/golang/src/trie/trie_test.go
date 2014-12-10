@@ -31,7 +31,7 @@ func TestTrie(t *testing.T) {
 	for _, c := range cases {
 		v, ok := trie.Get([]byte(c.key)).(string)
 		if !ok || v != c.value {
-			t.Errorf()
+			t.Errorf("expected trie to have %v, got %v", c.value, v)
 		}
 	}
 
