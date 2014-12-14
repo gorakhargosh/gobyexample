@@ -1,0 +1,14 @@
+CC = gcc
+CC_FLAGS += -Wall
+CC_FLAGS += -pedantic
+CC_FLAGS += -O3
+
+
+# ------------------------------------------------------------------------------
+# c_binary build definition.
+# ------------------------------------------------------------------------------
+!c_binary = |> ^ [CC] %f ^ $(CC) $(CC_FLAGS) -o %o %f |>
+
+
+# Platform-specific overrides.
+include c-@(TUP_PLATFORM).tup

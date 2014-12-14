@@ -1,3 +1,12 @@
-TOP_DIR = $(TUP_CWD)
+# Project wide definitions and rule macros go here.
 
-!gocc = |> $(TOP_DIR)/bin/go build %f |> %B
+# Base paths.
+_               = $(TUP_CWD)
+TEMP_DIR        = /tmp
+
+include build_defs/unixen.tup
+
+include build_defs/ar.tup
+include build_defs/c.tup
+include build_defs/cplusplus.tup
+include build_defs/go.tup

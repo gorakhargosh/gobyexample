@@ -1,0 +1,26 @@
+# ------------------------------------------------------------------------------
+# Go tool.
+# ------------------------------------------------------------------------------
+GO = $(_)/bin/pathenv GOPATH=$(_)/third_party/golang:$(_)/lib/golang go
+# NOTE(yesudeep): We do not include the system GOPATH here because that breaks
+# build reliability. We should only include checked-in source code.
+GO_FLAGS =
+
+
+# ------------------------------------------------------------------------------
+# go_binary build definition.
+# ------------------------------------------------------------------------------
+# This build definition uses the wrapper script to call go with GOPATH set to
+# the //third_party/golang and //golang directories.
+!go_binary = |> ^ [GO] %f ^ $(GO) $(GO_FLAGS) build %f |> %B
+
+
+# ------------------------------------------------------------------------------
+# go_install build definition.
+# ------------------------------------------------------------------------------
+# WARNING: DO NOT USE THIS. It generates 'pkg' directories in
+# third_party/golang/ and tup cannot deal with directories being generated as
+# targets. Leaving this build definition around as a reminder to not go down
+# this rabbit hole.
+#
+# !go_install = |> ^ [INSTALL :go] ^ $(GO) $(GO_FLAGS) install |> %o

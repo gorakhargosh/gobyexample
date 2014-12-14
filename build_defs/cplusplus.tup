@@ -1,0 +1,3 @@
+CXX = g++
+CXX_FLAGS += -Wall
+CXX_FLAGS += -O3

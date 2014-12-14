@@ -1,0 +1,2 @@
+# Apple Mac OS X-specific build definition overrides.
+CC = clang
